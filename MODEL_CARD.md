@@ -86,7 +86,7 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 
 | Statistic | Value |
 |---|---|
-| Patients | 24 (25 video clips) |
+| Patients | 25 |
 | Total frames | 78,849 |
 | Temporal sequences | 629 (322 closed, 307 open) |
 | Frame rate | 30 fps |
@@ -128,7 +128,7 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 ## Limitations
 
 - **Single-center data**: Model was trained and validated on data from one pediatric hospital. Generalization to other centers, patient populations, or endoscope hardware has not been tested.
-- **Small sample size**: 24 patients / 629 sequences. Performance metrics have wide confidence intervals.
+- **Small sample size**: 25 patients / 629 sequences. Performance metrics have wide confidence intervals.
 - **Binary classification only**: The model predicts open vs. closed; it does not characterize closure patterns (coronal, sagittal, circular) or degree of closure.
 - **No audio integration**: Only visual frames are analyzed; speech audio is not used.
 

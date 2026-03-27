@@ -147,7 +147,7 @@ python scripts/baseline_lstm.py            # ResNet50 + LSTM
 
 ## Dataset
 
-The dataset consists of 25 NP video clips from 24 pediatric patients (629 temporal sequences, 78,849 frames) collected at a single tertiary academic children's hospital. Due to patient privacy regulations (HIPAA/IRB), the raw video data cannot be publicly shared.
+The dataset consists of 25 NP video clips from 25 pediatric patients (629 temporal sequences, 78,849 frames) collected at a single tertiary academic children's hospital. Due to patient privacy regulations (HIPAA/IRB), the raw video data cannot be publicly shared.
 
 **What is included in this repository:**
 - Expert annotation files (JSON) with temporal keyframes and bounding boxes
