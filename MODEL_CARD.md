@@ -101,10 +101,10 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 
 | Metric | Value | 95% CI |
 |---|---|---|
-| Configuration | 160×160, no augmentation, window=45 | — |
-| Accuracy | 69.32% | [63.71%, 74.93%] |
-| AUC | 74.93% | [67.41%, 81.97%] |
-| F1 | 0.708 | — |
+| Configuration | Naso-Net (WMV), 128×128, no augmentation, window=45 | — |
+| Accuracy | 78.8% | [69.6%, 83.4%] |
+| AUC | 79.2% | [70.7%, 85.2%] |
+| F1 | 0.748 | — |
 
 ### Baseline Comparisons (128×128, no augmentation)
 

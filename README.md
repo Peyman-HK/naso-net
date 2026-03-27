@@ -13,7 +13,7 @@ This repository contains the source code, annotations, and trained model weights
 
 Naso-Net is a sequence-level deep learning model built on a **time-distributed ResNet50** backbone with a **Weighted Mean Voting (WMV)** aggregation layer. It takes a temporal sliding window of video frames as input and predicts whether the velopharyngeal port is open or closed during that sequence.
 
-**Selected primary result**: Among the reviewer-compliant ablation experiments, we selected **160×160 with no augmentation** as the primary reported configuration because it achieved the highest AUC while avoiding anatomically implausible augmentations.
+**Selected primary result**: The primary reported configuration in this repository is **Naso-Net (WMV), 128×128, no augmentation**, which achieved the best overall performance among the models summarized here.
 
 **Key results** (10-fold patient-wise cross-validation, 128×128, no augmentation):
 
@@ -23,10 +23,10 @@ Naso-Net is a sequence-level deep learning model built on a **time-distributed R
 | ResNet50+LSTM      | 0.687 [0.619, 0.752]    | 0.717 [0.646, 0.795]    | 0.683 |
 | **Naso-Net (WMV)** | **0.788 [0.696, 0.834]**| **0.792 [0.707, 0.852]**| **0.748** |
 
-**Primary reviewer-compliant ablation result** (160×160, no augmentation, window=45):
-- **Accuracy**: 69.32% [63.71%, 74.93%]
-- **AUC**: 74.93% [67.41%, 81.97%]
-- **F1**: 0.708
+**Primary reported WMV result** (128×128, no augmentation, window=45):
+- **Accuracy**: 78.8% [69.6%, 83.4%]
+- **AUC**: 79.2% [70.7%, 85.2%]
+- **F1**: 0.748
 
 ---
 
@@ -65,10 +65,7 @@ naso-net/
 │   └── naso_net_fold2.weights.h5       # Best weights, fold 2 (5 MB)
 │
 └── results/
-    ├── predictions.npz                 # Stored predictions
-    ├── baseline_results.csv            # Baseline comparison results
-    ├── ablation_results.csv            # Ablation study results
-    └── frame_weight_analysis.png       # Frame weight visualization
+  └── frame_weight_analysis.png       # Frame weight visualization
 ```
 
 ---
