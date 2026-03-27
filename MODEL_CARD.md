@@ -53,7 +53,7 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 |---|---|
 | Backbone | ResNet50 (ImageNet pretrained) |
 | Trainable layers | Last 20 of ResNet50 + all dense heads |
-| Input resolution | 90×90 (main), 128×128 / 160×160 (ablation) |
+| Input resolution | 128×128 / 160×160 (reviewer-compliant ablation runs) |
 | Temporal window | 45 frames (~1.5 seconds at 30 fps) |
 | Batch size | 8 |
 | Optimizer | Adam |
@@ -74,11 +74,11 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 
 ### Data Augmentation (when applied)
 
-| Level | Rotation | Width/Height shift | Shear | Zoom | Flip |
+| Level | Rotation | Brightness | Contrast | Zoom | Flip |
 |---|---|---|---|---|---|
 | None | — | — | — | — | — |
-| Conservative | ±10° | ±5% | ±5° | ±5% | Horizontal |
-| Moderate | ±15° | ±10% | ±10° | ±10% | Horizontal |
+| Conservative | ±5° | ±10% | ±10% | — | None |
+| Moderate | ±10° | ±15% | ±15% | — | None |
 
 ---
 
@@ -97,12 +97,14 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 
 ## Performance
 
-### Main Results (90×90, conservative augmentation, window=45)
+### Primary Reported Result
 
 | Metric | Value | 95% CI |
 |---|---|---|
-| Accuracy | 80.22% | [77.5%, 82.8%] |
-| AUC | 82.36% | [78.4%, 84.5%] |
+| Configuration | 160×160, no augmentation, window=45 | — |
+| Accuracy | 69.32% | [63.71%, 74.93%] |
+| AUC | 74.93% | [67.41%, 81.97%] |
+| F1 | 0.708 | — |
 
 ### Baseline Comparisons (128×128, no augmentation)
 
@@ -119,9 +121,9 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 | 128×128 | none | 0.696 [0.646, 0.744] | 0.732 [0.667, 0.802] |
 | 128×128 | conservative | 0.680 [0.625, 0.736] | 0.721 [0.660, 0.789] |
 | 128×128 | moderate | 0.688 [0.638, 0.738] | 0.725 [0.665, 0.790] |
-| 160×160 | none | 0.678 [0.625, 0.731] | 0.717 [0.659, 0.779] |
-| 160×160 | conservative | 0.680 [0.627, 0.733] | 0.723 [0.667, 0.774] |
-| 160×160 | moderate | 0.669 [0.629, 0.708] | 0.721 [0.675, 0.766] |
+| 160×160 | none | 0.693 [0.637, 0.749] | 0.749 [0.674, 0.820] |
+| 160×160 | conservative | 0.636 [0.581, 0.697] | 0.683 [0.616, 0.759] |
+| 160×160 | moderate | 0.668 [0.599, 0.736] | 0.721 [0.630, 0.807] |
 
 ---
 

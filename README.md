@@ -13,6 +13,8 @@ This repository contains the source code, annotations, and trained model weights
 
 Naso-Net is a sequence-level deep learning model built on a **time-distributed ResNet50** backbone with a **Weighted Mean Voting (WMV)** aggregation layer. It takes a temporal sliding window of video frames as input and predicts whether the velopharyngeal port is open or closed during that sequence.
 
+**Selected primary result**: Among the reviewer-compliant ablation experiments, we selected **160×160 with no augmentation** as the primary reported configuration because it achieved the highest AUC while avoiding anatomically implausible augmentations.
+
 **Key results** (10-fold patient-wise cross-validation, 128×128, no augmentation):
 
 | Model              | Accuracy [95% CI]       | AUC [95% CI]            | F1    |
@@ -21,9 +23,10 @@ Naso-Net is a sequence-level deep learning model built on a **time-distributed R
 | ResNet50+LSTM      | 0.687 [0.619, 0.752]    | 0.717 [0.646, 0.795]    | 0.683 |
 | **Naso-Net (WMV)** | **0.788 [0.696, 0.834]**| **0.792 [0.707, 0.852]**| **0.748** |
 
-With optimal hyperparameters (90×90, conservative augmentation, window=45):
-- **Accuracy**: 80.22% [77.5%, 82.8%]
-- **AUC**: 82.36% [78.4%, 84.5%]
+**Primary reviewer-compliant ablation result** (160×160, no augmentation, window=45):
+- **Accuracy**: 69.32% [63.71%, 74.93%]
+- **AUC**: 74.93% [67.41%, 81.97%]
+- **F1**: 0.708
 
 ---
 
@@ -116,7 +119,7 @@ python scripts/naso_net_train.py
 ```
 
 Key training parameters (configurable in script):
-- Resolution: 90×90 (default) or 128×128 / 160×160
+- Resolution: 128×128 or 160×160 for the reviewer-compliant ablation runs
 - Sliding window: 45 frames (~1.5s at 30 fps)
 - Max epochs: 75, early stopping patience: 15
 - Learning rate: 1e-3 with OneCycleLR
