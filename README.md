@@ -17,9 +17,9 @@ Naso-Net is a sequence-level deep learning model built on a **time-distributed R
 
 | Model              | Accuracy [95% CI]       | AUC [95% CI]            | F1    |
 |--------------------|-------------------------|-------------------------|-------|
-| ResNet50+MeanPool  | 0.690 [0.625, 0.755]    | 0.737 [0.654, 0.827]    | 0.704 |
-| ResNet50+LSTM      | 0.647 [0.589, 0.712]    | 0.687 [0.616, 0.765]    | 0.650 |
-| **Naso-Net (WMV)** | **0.696 [0.646, 0.744]**| **0.732 [0.667, 0.802]**| 0.696 |
+| ResNet50+MeanPool  | 0.740 [0.665, 0.795]    | 0.777 [0.684, 0.847]    | 0.734 |
+| ResNet50+LSTM      | 0.687 [0.619, 0.752]    | 0.717 [0.646, 0.795]    | 0.683 |
+| **Naso-Net (WMV)** | **0.788 [0.696, 0.834]**| **0.792 [0.707, 0.852]**| **0.748** |
 
 With optimal hyperparameters (90×90, conservative augmentation, window=45):
 - **Accuracy**: 80.22% [77.5%, 82.8%]
