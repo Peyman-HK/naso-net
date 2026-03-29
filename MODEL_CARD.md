@@ -54,12 +54,12 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 | Backbone | ResNet50 (ImageNet pretrained) |
 | Trainable layers | Last 20 of ResNet50 + all dense heads |
 | Input resolution | 128×128 / 160×160 (reviewer-compliant ablation runs) |
-| Temporal window | 45 frames (~1.5 seconds at 30 fps) |
+| Temporal window | 45 frames (~1.8 seconds at 25 fps) |
 | Batch size | 8 |
 | Optimizer | Adam |
 | Learning rate | 1e-3 (max), 1e-4 (base) |
 | LR schedule | OneCycleLR (pct_start=0.3) |
-| Max epochs | 75 |
+| Max epochs | 60 |
 | Early stopping | patience=15, monitor=val_loss |
 | Checkpoint | Best val_auc per fold |
 | Loss | Binary cross-entropy |
@@ -89,7 +89,7 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 | Patients | 24 |
 | Total frames | 93,315 |
 | Temporal sequences | 629 (322 closed, 307 open) |
-| Frame rate | 30 fps |
+| Frame rate | 25 fps |
 | Center | Single tertiary academic children's hospital |
 | Video type | Nasopharyngoscopy (NP) |
 

@@ -103,7 +103,7 @@ def parse_args():
                    help="Temporal sliding window length (frames sampled per seq)")
     p.add_argument("--batch_size", type=int, default=8,
                    help="Sequences per batch")
-    p.add_argument("--epochs", type=int, default=75,
+    p.add_argument("--epochs", type=int, default=60,
                    help="Training epochs per fold")
     p.add_argument("--lr", type=float, default=1e-3,
                    help="Learning rate")

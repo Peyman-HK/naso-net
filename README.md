@@ -126,8 +126,8 @@ python scripts/naso_net_train.py
 
 Key training parameters (configurable in script):
 - Resolution: 128×128 or 160×160 for the reviewer-compliant ablation runs
-- Sliding window: 45 frames (~1.5s at 30 fps)
-- Max epochs: 75, early stopping patience: 15
+- Sliding window: 45 frames (~1.8s at 25 fps)
+- Max epochs: 60, early stopping patience: 15
 - Learning rate: 1e-3 with OneCycleLR
 - Cross-validation: 10-fold patient-wise (GroupKFold)
 
