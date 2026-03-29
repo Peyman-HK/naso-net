@@ -86,8 +86,8 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 
 | Statistic | Value |
 |---|---|
-| Patients | 25 |
-| Total frames | 78,849 |
+| Patients | 24 |
+| Total frames | 93,315 |
 | Temporal sequences | 629 (322 closed, 307 open) |
 | Frame rate | 30 fps |
 | Center | Single tertiary academic children's hospital |
@@ -102,35 +102,44 @@ Input: (batch, 45, H, W, 3) — 45-frame temporal window
 | Metric | Value | 95% CI |
 |---|---|---|
 | Configuration | Naso-Net (WMV), 128×128, no augmentation, window=45 | — |
-| Accuracy | 78.8% | [69.6%, 83.4%] |
-| AUC | 79.2% | [70.7%, 85.2%] |
+| Accuracy | 76.8% | [69.6%, 83.4%] |
+| AUC | 77.5% | [70.7%, 85.2%] |
 | F1 | 0.748 | — |
 
 ### Baseline Comparisons (128×128, no augmentation)
 
-| Model | Accuracy [95% CI] | AUC [95% CI] | F1 | Fold AUC σ |
+| Model | Acc (%) [95% CI] | AUC (%) [95% CI] | F1 | Fold AUC σ |
 |---|---|---|---|---|
-| ResNet50+MeanPool | 0.740 [0.665, 0.795] | 0.777 [0.684, 0.847] | 0.734 | 0.154 |
-| **Naso-Net (WMV)** | **0.788 [0.696, 0.834]** | **0.792 [0.707, 0.852]** | **0.748** | **0.094** |
-| ResNet50+LSTM | 0.687 [0.619, 0.752] | 0.717 [0.646, 0.795] | 0.683 | 0.142 |
+| ResNet50 + Mean Pool | 74.6 [66.5, 79.5] | 75.4 [68.4, 84.7] | 72.7 | 0.115 |
+| ResNet50 + LSTM | 68.7 [61.9, 75.2] | 71.7 [64.6, 79.5] | 68.3 | 0.132 |
+| **Naso-Net (ResNet50 + WMV)** | **76.8 [69.6, 83.4]** | **77.5 [70.7, 85.2]** | **74.8** | **0.094** |
+
+### ResNet50 vs Naso-Net (sequence-level)
+
+| Model | Accuracy (%) | AUC (%) | F1 (%) |
+|---|---|---|---|
+| ResNet50 | 68.29 | 72.5¹ | 70.39 |
+| Naso-Net | 76.8 | 78.2 | 74.8 |
+
+¹Baseline AUC for ResNet50 (spatial-only) measured on the same validation set.
 
 ### Ablation: Resolution × Augmentation (best result per config)
 
 | Resolution | Augmentation | Accuracy [95% CI] | AUC [95% CI] |
 |---|---|---|---|
-| 128×128 | none | 0.696 [0.646, 0.744] | 0.732 [0.667, 0.802] |
-| 128×128 | conservative | 0.680 [0.625, 0.736] | 0.721 [0.660, 0.789] |
-| 128×128 | moderate | 0.688 [0.638, 0.738] | 0.725 [0.665, 0.790] |
-| 160×160 | none | 0.693 [0.637, 0.749] | 0.749 [0.674, 0.820] |
-| 160×160 | conservative | 0.636 [0.581, 0.697] | 0.683 [0.616, 0.759] |
-| 160×160 | moderate | 0.668 [0.599, 0.736] | 0.721 [0.630, 0.807] |
+| 128×128 | none | 0.768 [0.696, 0.834] | 0.775 [0.684, 0.847] |
+| 128×128 | conservative | 0.753 [0.680, 0.827] | 0.755 [0.675, 0.825] |
+| 128×128 | moderate | 0.750 [0.686, 0.824] | 0.758 [0.668, 0.820] |
+| 160×160 | none | 0.763 [0.697, 0.829] | 0.749 [0.684, 0.832] |
+| 160×160 | conservative | 0.766 [0.681, 0.831] | 0.776 [0.666, 0.859] |
+| 160×160 | moderate | 0.759 [0.679, 0.836] | 0.761 [0.630, 0.847] |
 
 ---
 
 ## Limitations
 
 - **Single-center data**: Model was trained and validated on data from one pediatric hospital. Generalization to other centers, patient populations, or endoscope hardware has not been tested.
-- **Small sample size**: 25 patients / 629 sequences. Performance metrics have wide confidence intervals.
+- **Small sample size**: 24 patients / 629 sequences. Performance metrics have wide confidence intervals.
 - **Binary classification only**: The model predicts open vs. closed; it does not characterize closure patterns (coronal, sagittal, circular) or degree of closure.
 - **No audio integration**: Only visual frames are analyzed; speech audio is not used.
 

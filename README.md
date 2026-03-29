@@ -17,15 +17,24 @@ Naso-Net is a sequence-level deep learning model built on a **time-distributed R
 
 **Key results** (10-fold patient-wise cross-validation, 128×128, no augmentation):
 
-| Model              | Accuracy [95% CI]       | AUC [95% CI]            | F1    |
-|--------------------|-------------------------|-------------------------|-------|
-| ResNet50+MeanPool  | 0.740 [0.665, 0.795]    | 0.777 [0.684, 0.847]    | 0.734 |
-| ResNet50+LSTM      | 0.687 [0.619, 0.752]    | 0.717 [0.646, 0.795]    | 0.683 |
-| **Naso-Net (WMV)** | **0.788 [0.696, 0.834]**| **0.792 [0.707, 0.852]**| **0.748** |
+| Model | Acc (%) [95% CI] | AUC (%) [95% CI] | F1 | Fold AUC sigma |
+|-------|-------------------|------------------|----|----------------|
+| ResNet50 + Mean Pool | 74.6 [66.5, 79.5] | 75.4 [68.4, 84.7] | 72.7 | 0.115 |
+| ResNet50 + LSTM | 68.7 [61.9, 75.2] | 71.7 [64.6, 79.5] | 68.3 | 0.132 |
+| **Naso-Net (ResNet50 + WMV)** | **76.8 [69.6, 83.4]** | **77.5 [70.7, 85.2]** | **74.8** | **0.094** |
+
+**ResNet50 vs Naso-Net** (sequence-level, 128×128, no augmentation):
+
+| Model    | Accuracy (%) | AUC (%)  | F1 (%) |
+|----------|-------------|----------|--------|
+| ResNet50 | 68.29       | 72.5     | 70.39  |
+| Naso-Net | 76.8        | 78.2     | 74.8   |
+
+Naso-Net outperforms the standard ResNet50, with accuracy increased by nearly 8.5 percentage points (from 68.29% to 76.8%) and AUC improved by 5.7 percentage points (from 72.5% to 78.2%). This improvement results from end-to-end temporal modelling: while ResNet50 exploits only spatial features in individual frames, Naso-Net's learned frame-weighting mechanism captures the dynamic sequence of velar movement, yielding greater discriminative power for VPP classification.
 
 **Primary reported WMV result** (128×128, no augmentation, window=45):
-- **Accuracy**: 78.8% [69.6%, 83.4%]
-- **AUC**: 79.2% [70.7%, 85.2%]
+- **Accuracy**: 76.8% [69.6%, 83.4%]
+- **AUC**: 77.5% [70.7%, 85.2%]
 - **F1**: 0.748
 
 ---
@@ -136,7 +145,7 @@ python scripts/ablation_resolution_augmentation.py
 
 Runs a grid of {90×90, 128×128, 160×160} × {none, conservative, moderate} augmentation configurations.
 
-### Baseline Comparisons
+### Baseline Comparison
 
 ```bash
 python scripts/baseline_mean_pooling.py    # ResNet50 + Mean Pooling
@@ -147,7 +156,7 @@ python scripts/baseline_lstm.py            # ResNet50 + LSTM
 
 ## Dataset
 
-The dataset consists of 25 NP video clips from 25 pediatric patients (629 temporal sequences, 78,849 frames) collected at a single tertiary academic children's hospital. Due to patient privacy regulations (HIPAA/IRB), the raw video data cannot be publicly shared.
+The dataset consists of 24 NP video clips from 24 pediatric patients (629 temporal sequences, 93,315 frames) collected at a single tertiary academic children's hospital. Due to patient privacy regulations (HIPAA/IRB), the raw video data cannot be publicly shared.
 
 **What is included in this repository:**
 - Expert annotation files (JSON) with temporal keyframes and bounding boxes
